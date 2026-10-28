@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monte seu pedido · Açougue Jeová Jiré</title>
+<meta name="description" content="Monte seu pedido no Açougue Jeová Jiré: escolha os cortes, o peso e o preparo, e envie tudo pelo WhatsApp. Pilar, Olhos D'Água, Belo Horizonte.">
+<meta name="theme-color" content="#D81E26">
+<link rel="icon" href="https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/85f9386b-d5d4-4808-93de-da8b493ce8c2/logo-selo.png?format=300w">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brasa:#D81E26;--brasa-escuro:#B3161D;--tinta:#1C1A19;--texto:#46423E;--suave:#6F6A64;--fundo:#F7F6F4;--sup2:#F2F0ED;--linha:#E2DFDA;--palha:#F5A9AC;--r:6px;
+  --titulo:"Rubik","Arial Rounded MT Bold",system-ui,sans-serif;--sans:"Instrument Sans",system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
+body{margin:0;background:var(--fundo);color:var(--texto);font:400 16.5px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--titulo);color:var(--tinta);margin:0;line-height:1.08;letter-spacing:-.015em}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.cx{width:min(1200px,100% - 40px);margin-inline:auto}
+:focus-visible{outline:2px solid var(--brasa);outline-offset:2px}
+
+/* topo */
+.topo{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--linha)}
+.topo .cx{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.lockup{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--tinta)}
+.lockup img{width:50px;height:auto}
+.lockup span{display:flex;flex-direction:column;line-height:1}
+.lockup small{font:700 10px/1 var(--sans);letter-spacing:.42em;text-transform:uppercase;color:var(--brasa);margin-bottom:4px}
+.lockup b{font:800 19px/1 var(--titulo);text-transform:uppercase}
+.voltar{font-weight:600;font-size:15px;color:var(--tinta);text-decoration:underline;text-decoration-color:var(--brasa);text-underline-offset:5px;text-decoration-thickness:2px}
+
+/* abertura */
+.abre{padding:36px 0 8px}
+.abre h1{font-size:clamp(32px,4.2vw,50px);font-weight:800}
+.abre p{max-width:640px;margin:12px 0 0;font-size:clamp(16.5px,1.3vw,18px)}
+.passos{display:flex;flex-wrap:wrap;gap:8px 22px;margin:18px 0 0;padding:0;list-style:none;font-size:15px;font-weight:600;color:var(--tinta)}
+.passos li{display:flex;align-items:center;gap:8px}
+.passos b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--brasa);color:#fff;font:700 13px/1 var(--titulo)}
+
+/* corpo: cortes a esquerda, comanda a direita */
+.corpo{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:36px;align-items:start;padding:26px 0 120px}
+.filtros{position:sticky;top:72px;z-index:10;background:var(--fundo);padding:14px 0 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.busca{flex:1 1 220px;min-height:46px;padding:0 14px 0 40px;border:1px solid var(--linha);border-radius:10px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236F6A64' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E") 13px center/18px no-repeat}
+.abas{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.abas::-webkit-scrollbar{display:none}
+.aba{flex:none;min-height:46px;padding:0 16px;border:1px solid var(--linha);border-radius:10px;background:#fff;font:600 15.5px/1 var(--titulo);color:var(--tinta)}
+.aba[aria-pressed="true"]{background:var(--brasa);border-color:var(--brasa);color:#fff;box-shadow:0 10px 18px -12px rgba(216,30,38,.9)}
+.grupo{margin-top:26px}
+.grupo h2{font-size:24px;padding-bottom:12px;border-bottom:1px solid var(--linha);margin-bottom:14px}
+.lista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.item{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px;background:#fff;border:1px solid var(--linha);border-radius:12px;transition:border-color .2s,box-shadow .2s}
+.item.tem{border-color:var(--brasa);box-shadow:0 0 0 1px var(--brasa),0 14px 26px -22px rgba(216,30,38,.8)}
+.item img{width:96px;height:96px;object-fit:cover;border-radius:8px}
+.item h3{font-size:18px}
+.item p{margin:4px 0 0;font-size:14.5px;line-height:1.4;color:var(--suave)}
+.item .ctrl{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.qtd{display:inline-flex;align-items:center;border:1px solid var(--linha);border-radius:10px;background:var(--sup2);overflow:hidden}
+.qtd button{width:42px;height:42px;border:0;background:none;font:700 20px/1 var(--titulo);color:var(--tinta)}
+.qtd button:hover{background:#fff}
+.qtd button:disabled{opacity:.35;cursor:default;background:none}
+.qtd output{min-width:72px;text-align:center;font:700 15.5px/1 var(--titulo);color:var(--tinta)}
+.item.tem .qtd output{color:var(--brasa)}
+.prep{flex:1 1 150px;min-height:44px;padding:0 10px;border:1px solid var(--linha);border-radius:10px;background:#fff;font-size:15px}
+.item:not(.tem) .prep{display:none}
+.add{min-height:44px;padding:0 16px;border:1px solid var(--tinta);border-radius:10px;background:#fff;font-weight:600;font-size:15px;color:var(--tinta)}
+.add:hover{background:var(--tinta);color:#fff}
+.item.tem .add{display:none}
+.kit{grid-template-columns:120px 1fr;background:var(--tinta);border-color:var(--tinta);color:#D9D2CC}
+.kit img{width:120px;height:120px}
+.kit h3{color:#fff;font-size:21px}
+.kit p{color:#CFC7C0}
+.kit .preco{display:inline-block;margin-top:6px;font:800 22px/1 var(--titulo);color:#fff}
+.kit .preco small{font-size:.6em;color:var(--palha);margin-right:4px}
+.kit .qtd{background:#fff}
+.kit .add{background:var(--brasa);border-color:var(--brasa);color:#fff}
+.nada{padding:30px 0;color:var(--suave)}
+
+/* comanda */
+.comanda{position:sticky;top:96px;background:#fff;border:1px solid var(--linha);border-top:6px solid var(--brasa);border-radius:var(--r);box-shadow:0 30px 60px -40px rgba(60,10,10,.45);display:flex;flex-direction:column;max-height:calc(100vh - 116px)}
+.com-topo{display:flex;align-items:center;gap:12px;padding:18px 20px 14px;border-bottom:2px dashed var(--linha)}
+.com-topo img{width:46px}
+.com-topo b{display:block;font:700 17px/1.15 var(--titulo);color:var(--tinta)}
+.com-topo small{font-size:14px;color:var(--suave)}
+.fechar{display:none;margin-left:auto;width:40px;height:40px;border:1px solid var(--linha);border-radius:10px;background:#fff;font-size:22px;line-height:1}
+.com-meio{overflow:auto;padding:4px 20px}
+.com-vazio{padding:22px 0;color:var(--suave);font-size:15.5px}
+.com-itens{list-style:none;margin:0;padding:0}
+.com-itens li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 0;border-bottom:1px dashed var(--linha)}
+.com-itens b{color:var(--tinta);font-weight:600}
+.com-itens span{grid-column:1;font-size:14px;color:var(--suave)}
+.com-itens em{font-style:normal;font:700 15px/1.2 var(--titulo);color:var(--tinta);text-align:right}
+.com-itens button{grid-column:2;grid-row:2;justify-self:end;border:0;background:none;padding:0;font-size:13.5px;font-weight:600;color:var(--brasa);text-decoration:underline;text-underline-offset:3px}
+.total{display:flex;justify-content:space-between;padding:14px 0 6px;font-weight:600;color:var(--tinta)}
+.total b{font:800 20px/1 var(--titulo)}
+.campos{display:grid;gap:10px;padding:12px 0 6px}
+.campos label{font-size:14px;font-weight:600;color:var(--tinta)}
+.campos input,.campos textarea{width:100%;margin-top:5px;padding:10px 12px;border:1px solid var(--linha);border-radius:10px;background:var(--fundo);font-size:15.5px}
+.campos textarea{min-height:64px;resize:vertical}
+.modo{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--sup2);border:1px solid var(--linha);border-radius:10px}
+.modo label{position:relative;display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:7px;font-size:14.5px;cursor:pointer}
+.modo input{position:absolute;opacity:0;pointer-events:none}
+.modo label:has(input:checked){background:#fff;color:var(--brasa);box-shadow:0 1px 2px rgba(0,0,0,.08),0 6px 14px -8px rgba(26,24,23,.35)}
+.com-pe{padding:14px 20px 18px;border-top:1px solid var(--linha)}
+.enviar{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:54px;border:0;border-radius:var(--r);background:var(--brasa);color:#fff;font:600 16.5px/1 var(--sans);text-decoration:none}
+.enviar:hover{background:var(--brasa-escuro)}
+.enviar[aria-disabled="true"]{background:#C9C4BE;pointer-events:none}
+.enviar svg{width:20px;height:20px}
+.nota{margin:10px 0 0;font-size:13.5px;line-height:1.45;color:var(--suave)}
+.limpar{margin-top:8px;border:0;background:none;padding:0;font-size:13.5px;color:var(--suave);text-decoration:underline}
+
+/* barra do celular */
+.barra{display:none}
+@media (max-width:980px){
+  .corpo{grid-template-columns:minmax(0,1fr)}
+  .comanda{position:fixed;inset:auto 0 0 0;top:auto;z-index:40;max-height:88vh;border-radius:16px 16px 0 0;transform:translateY(105%);transition:transform .3s ease;box-shadow:0 -20px 50px -20px rgba(0,0,0,.5)}
+  body.aberta .comanda{transform:none}
+  body.aberta::after{content:"";position:fixed;inset:0;z-index:30;background:rgba(28,26,25,.45)}
+  .fechar{display:block}
+  .barra{display:flex;position:fixed;left:10px;right:10px;bottom:10px;z-index:25;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 18px;background:var(--tinta);color:#fff;border-radius:14px;box-shadow:0 14px 34px -12px rgba(26,24,23,.6)}
+  .barra span{font-size:14.5px;line-height:1.3}
+  .barra b{display:block;font:700 16px/1.2 var(--titulo)}
+  .barra button{min-height:46px;padding:0 18px;border:0;border-radius:10px;background:var(--brasa);color:#fff;font-weight:700}
+}
+@media (max-width:640px){
+  .lista{grid-template-columns:1fr}
+  .topo .cx{height:64px}
+  .filtros{top:64px}
+  .voltar{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="topo"><div class="cx">
+  <a class="lockup" href="https://violet-trout-sn3s.squarespace.com" aria-label="Açougue Jeová Jiré, voltar ao site"><img src="https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/85f9386b-d5d4-4808-93de-da8b493ce8c2/logo-selo.png?format=300w" alt="" width="50" height="45"><span><small>Açougue</small><b>Jeová Jiré</b></span></a>
+  <a class="voltar" href="https://violet-trout-sn3s.squarespace.com">Voltar ao site</a>
+</div></header>
+<main class="cx">
+  <section class="abre">
+    <h1>Monte seu pedido</h1>
+    <p>Escolha quantos cortes quiser, com o peso e o preparo de cada um. O pedido vai inteiro numa mensagem só para o WhatsApp do açougue, e a gente responde com o valor do dia.</p>
+    <ol class="passos"><li><b>1</b>Escolha os cortes</li><li><b>2</b>Ajuste peso e preparo</li><li><b>3</b>Envie pelo WhatsApp</li></ol>
+  </section>
+  <div class="corpo">
+    <div>
+      <div class="filtros">
+        <input class="busca" type="search" placeholder="Buscar corte, por exemplo: picanha" aria-label="Buscar corte">
+        <div class="abas" role="group" aria-label="Seções"></div>
+      </div>
+      <div id="cortes"></div>
+    </div>
+    <aside class="comanda" aria-label="Seu pedido">
+      <div class="com-topo"><img src="https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/85f9386b-d5d4-4808-93de-da8b493ce8c2/logo-selo.png?format=300w" alt="" width="46" height="41"><span><b>Seu pedido</b><small>Açougue Jeová Jiré</small></span><button class="fechar" type="button" aria-label="Fechar o pedido">×</button></div>
+      <div class="com-meio">
+        <p class="com-vazio">Seu pedido está vazio. Toque em <strong>Adicionar</strong> nos cortes que quiser.</p>
+        <ul class="com-itens"></ul>
+        <div class="total" hidden><span>Total aproximado</span><b>0 kg</b></div>
+        <div class="campos">
+          <div class="modo" role="radiogroup" aria-label="Entrega ou retirada">
+            <label><input type="radio" name="modo" value="entrega" checked>Entrega em casa</label>
+            <label><input type="radio" name="modo" value="retirada">Retiro no balcão</label>
+          </div>
+          <label class="so-entrega">Bairro para a entrega<input name="bairro" autocomplete="address-level3" placeholder="Ex.: Olhos D'Água"></label>
+          <label>Seu nome (opcional)<input name="nome" autocomplete="given-name"></label>
+          <label>Observação (opcional)<textarea name="obs" placeholder="Ex.: bifes bem finos, separar em porções de 500 g"></textarea></label>
+        </div>
+      </div>
+      <div class="com-pe">
+        <a class="enviar" href="#" target="_blank" rel="noopener" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.2-1.4A9.9 9.9 0 1 0 12 2Zm0 18.1c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.1 8.1 0 1 1 12 20.1Zm4.5-6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.5-.7-2.2-1.4-.6-.5-1-1.2-1.2-1.6-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>Enviar pedido pelo WhatsApp</a>
+        <p class="nota">A mensagem abre pronta no WhatsApp e você ainda pode mudar o que quiser antes de enviar. Fotos ilustrativas.</p>
+        <button class="limpar" type="button" hidden>Esvaziar pedido</button>
+      </div>
+    </aside>
+  </div>
+</main>
+<div class="barra" aria-live="polite"><span><b>Seu pedido</b><i>Nenhum corte ainda</i></span><button type="button">Ver pedido</button></div>
+<script>
+(function () {
+  var D = {"zap":"5531988236396","site":"https://violet-trout-sn3s.squarespace.com","cortes":[{"id":"picanha","n":"Picanha","g":"boi","d":"Peça com capa de gordura, inteira ou em bifes grossos.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/bfa30739-9dc7-41f7-bc77-5d4fc651e7d2/banco-picanha.jpg?format=500w"},{"id":"contrafile","n":"Contrafilé","g":"boi","d":"Em peça, em bifes ou em tiras para o churrasco.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/90e7865e-bc5f-4479-9459-e6237e30d8a0/banco-contrafile.jpg?format=500w"},{"id":"mignon","n":"Filé mignon","g":"boi","d":"O mais macio do boi. Inteiro, em medalhão ou em cubos.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/53c52aa2-af0b-48c3-9180-18575561d901/banco-mignon.jpg?format=500w"},{"id":"cha","n":"Chã de dentro","g":"boi","d":"O bife do dia a dia. Batido, em tiras ou moído.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/e1636736-5db4-4d7e-b6c5-77a981a11a6c/banco-cha.jpg?format=500w"},{"id":"alcatra","n":"Alcatra","g":"boi","d":"Em bife, no espeto ou em peça para assar.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/b45b5f42-cff0-4d16-a460-bc8685c51c50/banco-alcatra.jpg?format=500w"},{"id":"patinho","n":"Patinho","g":"boi","d":"Magro, ótimo para moer na hora ou para bife.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/46de847e-489c-450f-a206-6fef5c4b9e83/banco-patinho.jpg?format=500w"},{"id":"costela","n":"Costela bovina","g":"boi","d":"Em ripa para o fogo ou em pedaços para a panela.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/a17d807d-34d9-47ee-a0cf-e38bfe35f343/banco-costela.jpg?format=500w"},{"id":"fraldinha","n":"Fraldinha","g":"boi","d":"Suculenta e rápida na grelha.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/e62b789c-0706-4870-ba1c-45d5ffe1fea5/banco-fraldinha.jpg?format=500w"},{"id":"acem","n":"Acém","g":"boi","d":"Para carne de panela, ensopado e molho.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/99c05636-c3c7-45be-8bdd-ea5a86984689/banco-acem.jpg?format=500w"},{"id":"cupim","n":"Cupim","g":"boi","d":"Para assar devagar, no forno ou na churrasqueira.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/27427610-d6c3-4b09-bc76-4d757be89e1a/banco-cupim.jpg?format=500w"},{"id":"musculo","n":"Músculo","g":"boi","d":"Para cozidos e caldos que pedem tempo de panela.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/3045f94a-481f-478d-a32c-eba646fcc2d7/banco-musculo.jpg?format=500w"},{"id":"moida","n":"Carne moída","g":"boi","d":"Moída na hora, com o corte que você escolher.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/56935870-eac6-43f3-a786-9fc96b405911/banco-moida.jpg?format=500w"},{"id":"pernil-suino","n":"Pernil suíno","g":"porco","d":"Inteiro para assar, em cubos ou em bifes.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/4990deef-6c44-4829-b243-56c77b0fcff2/banco-pernil-suino.jpg?format=500w"},{"id":"bisteca","n":"Bisteca suína","g":"porco","d":"Cortada na espessura que você pedir.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/9ab7f00f-c1ae-471b-9f83-fb26ba85de4c/banco-bisteca.jpg?format=500w"},{"id":"costelinha","n":"Costelinha suína","g":"porco","d":"Inteira ou em tiras, para forno ou brasa.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/a20fff98-b40d-4618-a1cc-5e819ac8d4cf/banco-costelinha.jpg?format=500w"},{"id":"panceta","n":"Panceta","g":"porco","d":"Barriga suína em peça ou em tiras.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/187f6c9b-32f2-44b1-9b47-38cd8c55bbbf/banco-panceta.jpg?format=500w"},{"id":"lombo","n":"Lombo suíno","g":"porco","d":"Peça para o forno ou em bifes finos.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/6f57aa62-fdd9-4777-976d-8e36742382d8/banco-lombo.jpg?format=500w"},{"id":"sobrecoxa","n":"Coxa e sobrecoxa","g":"frango","d":"Juntas ou separadas, com ou sem pele.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/8d9e28e1-884b-4f06-9975-6b54da564dd8/banco-sobrecoxa.jpg?format=500w"},{"id":"bife-peito","n":"Bife de filé de peito","g":"frango","d":"Filé de peito aberto em bifes.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/71f2aa19-ade6-4e88-9098-381d55b304a2/banco-bife-peito.jpg?format=500w"},{"id":"peito","n":"Peito de frango","g":"frango","d":"Inteiro, em cubos ou em tiras.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/e77532e3-5a77-4bbe-9326-f7ac2e42732b/banco-peito.jpg?format=500w"},{"id":"coxinha-asa","n":"Coxinha da asa","g":"frango","d":"Para o forno, a fritura ou a brasa.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/66d86146-6ce0-4531-bc93-fe7e9372f8dc/banco-coxinha-asa.jpg?format=500w"},{"id":"toscana","n":"Linguiça toscana","g":"linguica","d":"A clássica do churrasco.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/be62651a-ffbc-4a72-a128-eca8a4686fd3/banco-toscana.jpg?format=500w"},{"id":"linguica","n":"Linguiça de frango","g":"linguica","d":"Mais leve, para grelha ou frigideira.","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/c7cffef1-3e26-4ad3-b341-256b3647e06b/banco-linguica.jpg?format=500w"}],"grupos":[["boi","Boi"],["porco","Porco"],["frango","Frango"],["linguica","Linguiça"]],"preparos":{"boi":["Do jeito da casa","Em bifes","Em cubos","Em tiras","Moída na hora","Peça inteira","Porcionado para congelar"],"porco":["Do jeito da casa","Em bifes","Em cubos","Em tiras","Peça inteira","Porcionado para congelar"],"frango":["Do jeito da casa","Em filés","Em cubos","Em tiras","Inteiro","Porcionado para congelar"],"linguica":["Do jeito da casa","Em gomos","Porcionado para congelar"]},"kit":{"id":"kit-diario","n":"Kit Diário","preco":"R$ 218,00","f":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/a17d807d-34d9-47ee-a0cf-e38bfe35f343/banco-costela.jpg?format=500w","d":"Sete cortes de 1 kg: chã de dentro, acém, músculo, bife de filé de peito, pernil, coxa e sobrecoxa e costelinha."},"selo":"https://images.squarespace-cdn.com/content/v1/6ad7ac3e1e9f327a74ff439a/85f9386b-d5d4-4808-93de-da8b493ce8c2/logo-selo.png?format=300w"};
+  var PASSO = 0.5, MAX = 30, CHAVE = 'jj-pedido-v1';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var kg = function (q) { return q < 1 ? (q * 1000) + ' g' : String(q).replace('.', ',') + ' kg'; };
+  var todos = [D.kit].concat(D.cortes);
+  var porId = {}; todos.forEach(function (c) { porId[c.id] = c; });
+  // estado: { id: { q: quilos (ou unidades do kit), p: preparo } }
+  var pedido = {};
+  try { pedido = JSON.parse(localStorage.getItem(CHAVE) || '{}') || {}; } catch (e) { pedido = {}; }
+  Object.keys(pedido).forEach(function (id) { if (!porId[id]) delete pedido[id]; });
+  var salvar = function () { try { localStorage.setItem(CHAVE, JSON.stringify(pedido)); } catch (e) {} };
+
+  // ---- lista de cortes ----
+  var alvo = $('#cortes'), abas = $('.abas');
+  var cartao = function (c, kit) {
+    var g = kit ? null : c.g;
+    var preps = g ? D.preparos[g] : null;
+    return '<article class="item' + (kit ? ' kit' : '') + '" data-id="' + c.id + '" data-busca="' + esc((c.n + ' ' + (c.d || '')).toLowerCase()) + '">'
+      + '<img src="' + c.f + '" alt="' + esc(c.n) + ', imagem ilustrativa" width="96" height="96" loading="lazy">'
+      + '<div><h3>' + esc(c.n) + '</h3><p>' + esc(c.d) + '</p>' + (kit ? '<span class="preco"><small>R$</small>218,00</span>' : '') + '</div>'
+      + '<div class="ctrl"><button class="add" type="button">' + (kit ? 'Adicionar o kit' : 'Adicionar') + '</button>'
+      + '<span class="qtd" hidden><button type="button" data-d="-1" aria-label="Diminuir ' + esc(c.n) + '">−</button><output>0</output><button type="button" data-d="1" aria-label="Aumentar ' + esc(c.n) + '">+</button></span>'
+      + (preps ? '<select class="prep" aria-label="Preparo de ' + esc(c.n) + '">' + preps.map(function (p) { return '<option>' + p + '</option>'; }).join('') + '</select>' : '')
+      + '</div></article>';
+  };
+  var h = '<section class="grupo" data-g="kit"><h2>Kit da casa</h2><div class="lista">' + cartao(D.kit, true) + '</div></section>';
+  D.grupos.forEach(function (gr) {
+    var l = D.cortes.filter(function (c) { return c.g === gr[0]; });
+    if (l.length) h += '<section class="grupo" data-g="' + gr[0] + '" id="g-' + gr[0] + '"><h2>' + gr[1] + '</h2><div class="lista">' + l.map(function (c) { return cartao(c); }).join('') + '</div></section>';
+  });
+  alvo.innerHTML = h + '<p class="nada" hidden>Nenhum corte encontrado. Pergunte no WhatsApp: a lista do balcão muda conforme a carne que chega.</p>';
+  abas.innerHTML = [['tudo', 'Tudo']].concat(D.grupos).map(function (g, i) { return '<button class="aba" type="button" data-g="' + g[0] + '" aria-pressed="' + (i ? 'false' : 'true') + '">' + g[1] + '</button>'; }).join('');
+
+  // ---- filtros ----
+  var filtro = 'tudo', termo = '';
+  var aplicarFiltro = function () {
+    var vis = 0;
+    alvo.querySelectorAll('.grupo').forEach(function (s) {
+      var g = s.dataset.g, n = 0;
+      s.querySelectorAll('.item').forEach(function (it) {
+        var ok = (!termo || it.dataset.busca.indexOf(termo) >= 0) && (filtro === 'tudo' || g === filtro || (g === 'kit' && !termo && filtro === 'tudo'));
+        it.hidden = !ok; if (ok) n++;
+      });
+      s.hidden = !n; vis += n;
+    });
+    $('.nada').hidden = !!vis;
+  };
+  abas.addEventListener('click', function (e) {
+    var b = e.target.closest('.aba'); if (!b) return;
+    filtro = b.dataset.g;
+    abas.querySelectorAll('.aba').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    aplicarFiltro();
+    window.scrollTo({ top: alvo.getBoundingClientRect().top + scrollY - 150, behavior: 'smooth' });
+  });
+  $('.busca').addEventListener('input', function (e) { termo = e.target.value.trim().toLowerCase(); aplicarFiltro(); });
+
+  // ---- pedido ----
+  var mudar = function (id, d) {
+    var kit = id === D.kit.id, passo = kit ? 1 : PASSO, item = pedido[id];
+    var q = Math.round(((item ? item.q : 0) + d * passo) * 2) / 2;
+    if (q <= 0) delete pedido[id];
+    else pedido[id] = { q: Math.min(q, kit ? 10 : MAX), p: item ? item.p : (kit ? '' : 'Do jeito da casa') };
+    salvar(); desenhar();
+  };
+  alvo.addEventListener('click', function (e) {
+    var it = e.target.closest('.item'); if (!it) return;
+    if (e.target.closest('.add')) { mudar(it.dataset.id, it.dataset.id === D.kit.id ? 1 : 2); return; }
+    var b = e.target.closest('.qtd button'); if (b) mudar(it.dataset.id, +b.dataset.d);
+  });
+  alvo.addEventListener('change', function (e) {
+    var s = e.target.closest('.prep'); if (!s) return;
+    var id = s.closest('.item').dataset.id;
+    if (pedido[id]) { pedido[id].p = s.value; salvar(); desenhar(); }
+  });
+
+  var modo = function () { return (document.querySelector('input[name=modo]:checked') || {}).value; };
+  var campo = function (n) { return (document.querySelector('[name=' + n + ']') || {}).value || ''; };
+  var mensagem = function () {
+    var linhas = ['Olá! Vim pelo site e quero fazer este pedido:', ''];
+    Object.keys(pedido).forEach(function (id) {
+      var c = porId[id], it = pedido[id];
+      if (id === D.kit.id) linhas.push('• ' + it.q + (it.q > 1 ? ' Kits Diários' : ' Kit Diário') + ' (' + D.kit.preco + ' cada)');
+      else linhas.push('• ' + kg(it.q) + ' de ' + c.n.toLowerCase() + (it.p && it.p !== 'Do jeito da casa' ? ', ' + it.p.toLowerCase() : ''));
+    });
+    var t = totalKg();
+    if (t) linhas.push('', 'Total aproximado: ' + kg(t) + (pedido[D.kit.id] ? ' (fora o kit)' : ''));
+    linhas.push('');
+    if (modo() === 'retirada') linhas.push('Vou retirar no balcão.');
+    else linhas.push('Entrega em casa' + (campo('bairro').trim() ? ', no bairro ' + campo('bairro').trim() : '') + '.');
+    if (campo('nome').trim()) linhas.push('Meu nome: ' + campo('nome').trim() + '.');
+    if (campo('obs').trim()) linhas.push('Observação: ' + campo('obs').trim());
+    return linhas.join('\n');
+  };
+  var totalKg = function () { return Object.keys(pedido).reduce(function (s, id) { return id === D.kit.id ? s : s + pedido[id].q; }, 0); };
+
+  var desenhar = function () {
+    var ids = Object.keys(pedido), n = ids.length;
+    alvo.querySelectorAll('.item').forEach(function (it) {
+      var id = it.dataset.id, x = pedido[id], kit = id === D.kit.id;
+      it.classList.toggle('tem', !!x);
+      $('.qtd', it).hidden = !x;
+      $('output', it).textContent = x ? (kit ? x.q + (x.q > 1 ? ' kits' : ' kit') : kg(x.q)) : '0';
+      var s = $('.prep', it); if (s && x) s.value = x.p;
+    });
+    $('.com-itens').innerHTML = ids.map(function (id) {
+      var c = porId[id], x = pedido[id], kit = id === D.kit.id;
+      return '<li><b>' + esc(c.n) + '</b><em>' + (kit ? x.q + (x.q > 1 ? ' kits' : ' kit') : kg(x.q)) + '</em><span>' + (kit ? D.kit.preco + ' cada' : esc(x.p)) + '</span><button type="button" data-tira="' + id + '">Tirar</button></li>';
+    }).join('');
+    $('.com-vazio').hidden = !!n;
+    var t = totalKg();
+    $('.total').hidden = !t; $('.total b').textContent = kg(t);
+    $('.limpar').hidden = !n;
+    $('.barra i').textContent = n ? n + (n > 1 ? ' itens' : ' item') + (t ? ' · ' + kg(t) : '') : 'Nenhum corte ainda';
+    atualizarEnvio();
+  };
+  // os campos (bairro, nome, observacao, entrega) so mudam a mensagem: nao redesenhar a lista,
+  // senao o clique em "Tirar" logo depois de digitar se perde (a lista e recriada no meio do clique)
+  var atualizarEnvio = function () {
+    var n = Object.keys(pedido).length, a = $('.enviar');
+    a.setAttribute('aria-disabled', n ? 'false' : 'true');
+    a.href = n ? 'https://wa.me/' + D.zap + '?text=' + encodeURIComponent(mensagem()) : '#';
+    $('.so-entrega').hidden = modo() === 'retirada';
+  };
+  $('.com-itens').addEventListener('click', function (e) { var b = e.target.closest('[data-tira]'); if (b) { delete pedido[b.dataset.tira]; salvar(); desenhar(); } });
+  $('.campos').addEventListener('input', atualizarEnvio);
+  $('.campos').addEventListener('change', atualizarEnvio);
+  $('.limpar').addEventListener('click', function () { pedido = {}; salvar(); desenhar(); });
+  // celular: comanda abre por baixo
+  $('.barra button').addEventListener('click', function () { document.body.classList.add('aberta'); });
+  $('.fechar').addEventListener('click', function () { document.body.classList.remove('aberta'); });
+  document.addEventListener('click', function (e) { if (document.body.classList.contains('aberta') && !e.target.closest('.comanda') && !e.target.closest('.barra')) document.body.classList.remove('aberta'); });
+
+  // ?corte=picanha (vindo do botao do catalogo) ja adiciona o corte
+  var q = new URLSearchParams(location.search).get('corte');
+  if (q) { var id = q.toLowerCase(); var c = porId[id] || todos.filter(function (x) { return x.n.toLowerCase() === id; })[0]; if (c && !pedido[c.id]) mudar(c.id, c.id === D.kit.id ? 1 : 2); }
+  aplicarFiltro(); desenhar();
+})();
+</script>
+</body>
+</html>
